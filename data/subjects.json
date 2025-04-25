@@ -1,0 +1,28 @@
+{
+    "subjects": [
+      {
+        "id": "math",
+        "title": "Mathematics",
+        "description": "Algebra, Calculus, Geometry, and more",
+        "chaptersCount": 3,
+        "lessonsCount": 9,
+        "file": "math.json"
+      },
+      {
+        "id": "physics",
+        "title": "Physics",
+        "description": "Mechanics, Thermodynamics, Electromagnetism, and more",
+        "chaptersCount": 2,
+        "lessonsCount": 6,
+        "file": "physics.json"
+      },
+      {
+        "id": "english",
+        "title": "English",
+        "description": "Grammar, Literature, Writing, and more",
+        "chaptersCount": 2,
+        "lessonsCount": 4,
+        "file": "english.json"
+      }
+    ]
+  }

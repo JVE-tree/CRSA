@@ -1,0 +1,26 @@
+{
+    "id": "math",
+    "title": "Mathematics",
+    "description": "Algebra, Calculus, Geometry, and more",
+    "chapters": [
+      {
+        "id": "algebra",
+        "title": "Algebra",
+        "lessons": [
+            {
+                "id": "math-algebra-linear-equations",
+                "title": "Linear Equations",
+                "content": "<p>Linear equations are equations that form a straight line when plotted on a graph. They typically take the form of y = mx + b, where m is the slope and b is the y-intercept.</p><img src='/api/placeholder/800/400' alt='Linear Equations Graph'>",
+                "thumbnail": "/api/placeholder/400/300",
+                "tags": ["equations", "algebra", "basics"],
+                "files": [
+                    {
+                        "name": "Linear_Equations_Study_Guide.pdf",
+                        "url": "#"
+                    }
+                ]
+            }
+        ]
+      }
+    ]
+}

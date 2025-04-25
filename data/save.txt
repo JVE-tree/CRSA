@@ -1,0 +1,474 @@
+const data = {
+            subjects: [
+                {
+                    id: 'math',
+                    title: 'Mathematics',
+                    description: 'Algebra, Calculus, Geometry, and more',
+                    chaptersCount: 16,
+                    lessonsCount: 50,
+                    chapters: [
+                        {
+                            id: 'algebra',
+                            title: 'Algebra',
+                            lessons: [
+                                {
+                                    id: 'math-algebra-linear-equations',
+                                    title: 'Linear Equations',
+                                    content: '<p>Linear equations are equations that form a straight line when plotted on a graph. They typically take the form of y = mx + b, where m is the slope and b is the y-intercept.</p><img src="/api/placeholder/800/400" alt="Linear Equations Graph">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['equations', 'algebra', 'basics'],
+                                    files: [
+                                        {
+                                            name: 'Linear_Equations_Study_Guide.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'math-algebra-quadratic-equations',
+                                    title: 'Quadratic Equations',
+                                    content: '<p>Quadratic equations are second-degree polynomial equations that can be written in the standard form ax² + bx + c = 0, where a ≠ 0.</p><img src="/api/placeholder/800/400" alt="Quadratic Equations">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['equations', 'algebra', 'polynomials'],
+                                    files: [
+                                        {
+                                            name: 'Quadratic_Formula_Cheat_Sheet.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 'calculus',
+                            title: 'Calculus',
+                            lessons: [
+                                {
+                                    id: 'math-calculus-derivatives',
+                                    title: 'Derivatives',
+                                    content: `<p>A derivative measures the sensitivity to change of a function's output with respect to its input. It\'s the slope of the tangent line at any point on the curve.</p><img src="/api/placeholder/800/400" alt="Derivatives">`,
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['calculus', 'derivatives', 'rates of change'],
+                                    files: [
+                                        {
+                                            name: 'Derivatives_Rules.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'math-calculus-integrals',
+                                    title: 'Integrals',
+                                    content: '<p>Integration is the calculation of an integral. Integrals are used to find areas, volumes, central points and many other useful quantities.</p><img src="/api/placeholder/800/400" alt="Integrals">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['calculus', 'integrals', 'area under curve'],
+                                    files: [
+                                        {
+                                            name: 'Integration_Techniques.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 'geometry',
+                            title: 'Geometry',
+                            lessons: [
+                                {
+                                    id: 'math-geometry-triangles',
+                                    title: 'Triangles',
+                                    content: '<p>A triangle is a polygon with three edges and three vertices. The sum of the angles in a triangle is always 180 degrees.</p><img src="/api/placeholder/800/400" alt="Triangles">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['geometry', 'triangles', 'shapes'],
+                                    files: [
+                                        {
+                                            name: 'Triangle_Properties.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'math-geometry-circles',
+                                    title: 'Circles',
+                                    content: '<p>A circle is a shape consisting of all points in a plane that are at a given distance from a given point, the center.</p><img src="/api/placeholder/800/400" alt="Circles">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['geometry', 'circles', 'shapes'],
+                                    files: [
+                                        {
+                                            name: 'Circle_Formulas.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'physics',
+                    title: 'Physics',
+                    description: 'Mechanics, Thermodynamics, Electromagnetism, and more',
+                    chaptersCount: 2,
+                    lessonsCount: 6,
+                    chapters: [
+                        {
+                            id: 'mechanics',
+                            title: 'Mechanics',
+                            lessons: [
+                                {
+                                    id: 'physics-mechanics-newton-laws',
+                                    title: 'Newton\'s Laws',
+                                    content: '<p>Newton\'s laws of motion are three physical laws that describe the relationship between the motion of an object and the forces acting on it.</p><img src="/api/placeholder/800/400" alt="Newton\'s Laws">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['mechanics', 'laws', 'force'],
+                                    files: [
+                                        {
+                                            name: 'Newton_Laws_Examples.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'physics-mechanics-energy',
+                                    title: 'Energy and Work',
+                                    content: '<p>Energy is the quantitative property that must be transferred to an object in order to perform work on it. Work is the energy transferred to or from an object via the application of force along a displacement.</p><img src="/api/placeholder/800/400" alt="Energy and Work">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['mechanics', 'energy', 'work', 'conservation'],
+                                    files: [
+                                        {
+                                            name: 'Energy_Conservation_Problems.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 'electromagnetism',
+                            title: 'Electromagnetism',
+                            lessons: [
+                                {
+                                    id: 'physics-em-electric-fields',
+                                    title: 'Electric Fields',
+                                    content: '<p>An electric field is the region around an electric charge where electric forces are exerted on other charges.</p><img src="/api/placeholder/800/400" alt="Electric Fields">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['electromagnetism', 'electric field', 'charges'],
+                                    files: [
+                                        {
+                                            name: 'Electric_Field_Problems.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'physics-em-magnetic-fields',
+                                    title: 'Magnetic Fields',
+                                    content: '<p>A magnetic field is a vector field that describes the magnetic influence on moving electric charges, electric currents, and magnetic materials.</p><img src="/api/placeholder/800/400" alt="Magnetic Fields">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['electromagnetism', 'magnetic field', 'magnetism'],
+                                    files: [
+                                        {
+                                            name: 'Magnetic_Field_Examples.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'english',
+                    title: 'English',
+                    description: 'Grammar, Literature, Writing, and more',
+                    chaptersCount: 2,
+                    lessonsCount: 4,
+                    chapters: [
+                        {
+                            id: 'grammar',
+                            title: 'Grammar',
+                            lessons: [
+                                {
+                                    id: 'english-grammar-tenses',
+                                    title: 'Verb Tenses',
+                                    content: '<p>Verb tenses are used to indicate when an action takes place. The three main tenses are past, present, and future.</p><img src="/api/placeholder/800/400" alt="Verb Tenses">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['grammar', 'verbs', 'tenses'],
+                                    files: [
+                                        {
+                                            name: 'Verb_Tenses_Overview.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'english-grammar-punctuation',
+                                    title: 'Punctuation',
+                                    content: '<p>Punctuation marks are symbols that indicate the structure and organization of written language, as well as intonation and pauses to be observed when reading aloud.</p><img src="/api/placeholder/800/400" alt="Punctuation">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['grammar', 'punctuation', 'writing'],
+                                    files: [
+                                        {
+                                            name: 'Punctuation_Rules.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 'literature',
+                            title: 'Literature',
+                            lessons: [
+                                {
+                                    id: 'english-literature-shakespeare',
+                                    title: 'Shakespeare',
+                                    content: '<p>William Shakespeare was an English poet, playwright, and actor, widely regarded as the greatest writer in the English language and the world\'s greatest dramatist.</p><img src="/api/placeholder/800/400" alt="Shakespeare">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['literature', 'shakespeare', 'plays', 'sonnets'],
+                                    files: [
+                                        {
+                                            name: 'Shakespeare_Analysis.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'english-literature-poetry',
+                                    title: 'Poetry Analysis',
+                                    content: '<p>Poetry analysis is the process of examining a poem\'s form, content, structural semiotics and history to understand its meaning.</p><img src="/api/placeholder/800/400" alt="Poetry Analysis">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['literature', 'poetry', 'analysis'],
+                                    files: [
+                                        {
+                                            name: 'Poetry_Analysis_Framework.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'french',
+                    title: 'French',
+                    description: 'Grammar, Vocabulary, Culture, and more',
+                    chaptersCount: 2,
+                    lessonsCount: 4,
+                    chapters: [
+                        {
+                            id: 'grammar',
+                            title: 'Grammar',
+                            lessons: [
+                                {
+                                    id: 'french-grammar-verbs',
+                                    title: 'French Verbs',
+                                    content: '<p>French verbs are conjugated in four moods, four simple tenses, and in six persons. Most verbs belong to the regular -er verb group, with some being irregular.</p><img src="/api/placeholder/800/400" alt="French Verbs">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['french', 'grammar', 'verbs', 'conjugation'],
+                                    files: [
+                                        {
+                                            name: 'French_Verb_Conjugation.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'french-grammar-articles',
+                                    title: 'French Articles',
+                                    content: '<p>French uses different types of articles including definite (le, la, les), indefinite (un, une, des), and partitive (du, de la, des).</p><img src="/api/placeholder/800/400" alt="French Articles">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['french', 'grammar', 'articles'],
+                                    files: [
+                                        {
+                                            name: 'French_Articles_Guide.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 'vocabulary',
+                            title: 'Vocabulary',
+                            lessons: [
+                                {
+                                    id: 'french-vocabulary-basics',
+                                    title: 'Basic Vocabulary',
+                                    content: '<p>Essential French vocabulary for beginners including greetings, numbers, colors, and everyday phrases.</p><img src="/api/placeholder/800/400" alt="Basic French Vocabulary">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['french', 'vocabulary', 'basics'],
+                                    files: [
+                                        {
+                                          name: 'Basic_French_Vocabulary.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'french-vocabulary-intermediate',
+                                    title: 'Intermediate Vocabulary',
+                                    content: '<p>Expand your French vocabulary with intermediate-level words and phrases covering topics like travel, work, and daily life.</p><img src="/api/placeholder/800/400" alt="Intermediate French Vocabulary">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['french', 'vocabulary', 'intermediate'],
+                                    files: [
+                                        {
+                                            name: 'Intermediate_French_Vocab.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'mechanics',
+                    title: 'Mechanics',
+                    description: 'Engineering mechanics, machines, and principles',
+                    chaptersCount: 2,
+                    lessonsCount: 4,
+                    chapters: [
+                        {
+                            id: 'statics',
+                            title: 'Statics',
+                            lessons: [
+                                {
+                                    id: 'mechanics-statics-forces',
+                                    title: 'Forces and Equilibrium',
+                                    content: '<p>Statics is the branch of mechanics that deals with forces in equilibrium. Objects are in equilibrium when the net force acting on them is zero.</p><img src="/api/placeholder/800/400" alt="Forces and Equilibrium">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['mechanics', 'statics', 'forces', 'equilibrium'],
+                                    files: [
+                                        {
+                                            name: 'Forces_Equilibrium_Problems.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'mechanics-statics-moments',
+                                    title: 'Moments and Torque',
+                                    content: '<p>A moment is the turning effect of a force. Torque is the rotational equivalent of linear force.</p><img src="/api/placeholder/800/400" alt="Moments and Torque">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['mechanics', 'statics', 'moments', 'torque'],
+                                    files: [
+                                        {
+                                            name: 'Torque_Calculations.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 'dynamics',
+                            title: 'Dynamics',
+                            lessons: [
+                                {
+                                    id: 'mechanics-dynamics-kinematics',
+                                    title: 'Kinematics',
+                                    content: '<p>Kinematics is the branch of mechanics that describes the motion of objects without considering the forces that cause the motion.</p><img src="/api/placeholder/800/400" alt="Kinematics">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['mechanics', 'dynamics', 'kinematics', 'motion'],
+                                    files: [
+                                        {
+                                            name: 'Kinematics_Equations.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'mechanics-dynamics-kinetics',
+                                    title: 'Kinetics',
+                                    content: '<p>Kinetics is the branch of mechanics that deals with the relationship between the motion of bodies and its causes, namely forces and mass.</p><img src="/api/placeholder/800/400" alt="Kinetics">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['mechanics', 'dynamics', 'kinetics', 'force'],
+                                    files: [
+                                        {
+                                            name: 'Kinetics_Problems.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'automation',
+                    title: 'Automation',
+                    description: 'Robotics, Control Systems, and Industrial Automation',
+                    chaptersCount: 2,
+                    lessonsCount: 4,
+                    chapters: [
+                        {
+                            id: 'robotics',
+                            title: 'Robotics',
+                            lessons: [
+                                {
+                                    id: 'automation-robotics-intro',
+                                    title: 'Introduction to Robotics',
+                                    content: '<p>Robotics is an interdisciplinary field that integrates computer science and engineering to create robots, which are machines that can perform tasks automatically.</p><img src="/api/placeholder/800/400" alt="Introduction to Robotics">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['automation', 'robotics', 'introduction'],
+                                    files: [
+                                        {
+                                            name: 'Robotics_Overview.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'automation-robotics-kinematics',
+                                    title: 'Robot Kinematics',
+                                    content: '<p>Robot kinematics applies geometry to the study of the movement of robot arms, relating the joint positions and velocities to the position and orientation of the end-effector.</p><img src="/api/placeholder/800/400" alt="Robot Kinematics">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['automation', 'robotics', 'kinematics'],
+                                    files: [
+                                        {
+                                            name: 'Robot_Kinematics.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 'control-systems',
+                            title: 'Control Systems',
+                            lessons: [
+                                {
+                                    id: 'automation-control-pid',
+                                    title: 'PID Controllers',
+                                    content: '<p>A PID (Proportional-Integral-Derivative) controller is a control loop feedback mechanism widely used in industrial control systems.</p><img src="/api/placeholder/800/400" alt="PID Controllers">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['automation', 'control systems', 'PID'],
+                                    files: [
+                                        {
+                                            name: 'PID_Controller_Design.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'automation-control-feedback',
+                                    title: 'Feedback Systems',
+                                    content: '<p>Feedback systems are systems that use their output as input, allowing for self-regulation and stability in various conditions.</p><img src="/api/placeholder/800/400" alt="Feedback Systems">',
+                                    thumbnail: '/api/placeholder/400/300',
+                                    tags: ['automation', 'control systems', 'feedback'],
+                                    files: [
+                                        {
+                                            name: 'Feedback_Systems_Analysis.pdf',
+                                            url: '#'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
