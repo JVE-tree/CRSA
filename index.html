@@ -627,7 +627,7 @@
             console.log("Is GitHub Pages:", isGitHub);
             
             // Log the base URL we'll be using
-            const baseUrl = isGitHub ? '://jve-tree.github.io/CRSA/data' : window.location.href.split('/').slice(0, -1).join('/') + '/';
+            const baseUrl = isGitHub ? '://github.com/JVE-tree/CRSA/tree/main/data' : window.location.href.split('/').slice(0, -1).join('/') + '/';
             console.log("Base URL for fetching:", baseUrl);
             
             const preloadSuccess = preloadAllData().then(success => {
@@ -696,7 +696,7 @@
             try {
                 // First load the subjects list
                 const baseUrl = window.location.href.includes('github.io') ? 
-                    '://jve-tree.github.io/CRSA/data' : 
+                    '://github.com/JVE-tree/CRSA/tree/main/data' : 
                     window.location.href.split('/').slice(0, -1).join('/') + '/';
                 
                 const response = await fetch(new URL('subjects.json', baseUrl));
