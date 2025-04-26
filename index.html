@@ -618,23 +618,164 @@
         let allLessons = [];
 
         // Initialize the app
-        async function init() {
-            await loadSubjects();
-            setupEventListeners();
-            checkFavorites();
-            applyTheme();
+        function init() {
+            console.log("Initializing app...");
+            console.log("Current URL:", window.location.href);
+            
+            // Check if we're on GitHub pages
+            const isGitHub = window.location.href.includes('github.io');
+            console.log("Is GitHub Pages:", isGitHub);
+            
+            // Log the base URL we'll be using
+            const baseUrl = isGitHub ? '/CRSA/data/' : window.location.href.split('/').slice(0, -1).join('/') + '/';
+            console.log("Base URL for fetching:", baseUrl);
+            
+            const preloadSuccess = preloadAllData().then(success => {
+                console.log("Preload successful:", success);
+                
+                if (success) {
+                    renderSubjects();
+                } else {
+                    // Fallback to regular loading
+                    return loadSubjects();
+                }
+                
+                setupEventListeners();
+                checkFavorites();
+                applyTheme();
+            }).catch(err => {
+                console.error("Error during initialization:", err);
+            });
         }
 
+        function debugFileLoading() {
+            const baseUrl = window.location.href.split('/').slice(0, -1).join('/') + '/';
+            
+            console.log('Current base URL:', baseUrl);
+            console.log('Attempting to fetch subjects.json...');
+            
+            // Test subjects.json fetch
+            fetch(new URL('subjects.json', baseUrl))
+                .then(response => {
+                    console.log('subjects.json fetch status:', response.status);
+                    if (response.ok) {
+                        console.log('subjects.json loaded successfully!');
+                        return response.json();
+                    } else {
+                        throw new Error(`HTTP error ${response.status}`);
+                    }
+                })
+                .then(data => {
+                    console.log('subjects.json content:', data);
+                    
+                    // Try to fetch the first subject file
+                    if (data && data.subjects && data.subjects.length > 0) {
+                        const firstSubject = data.subjects[0];
+                        console.log(`Attempting to fetch ${firstSubject.file}...`);
+                        
+                        return fetch(new URL(firstSubject.file, baseUrl))
+                            .then(subjectResponse => {
+                                console.log(`${firstSubject.file} fetch status:`, subjectResponse.status);
+                                if (subjectResponse.ok) {
+                                    console.log(`${firstSubject.file} loaded successfully!`);
+                                    return subjectResponse.json();
+                                } else {
+                                    throw new Error(`HTTP error ${subjectResponse.status}`);
+                                }
+                            })
+                            .then(subjectData => {
+                                console.log(`${firstSubject.file} content:`, subjectData);
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Debug fetch error:', error);
+                });
+        }
+        async function preloadAllData() {
+            try {
+                // First load the subjects list
+                const baseUrl = window.location.href.includes('github.io') ? 
+                    '/CRSA/data/' : 
+                    window.location.href.split('/').slice(0, -1).join('/') + '/';
+                
+                const response = await fetch(new URL('subjects.json', baseUrl));
+                
+                if (!response.ok) throw new Error(`Failed to fetch subjects.json: ${response.status}`);
+                
+                const data = await response.json();
+                subjectsData = data.subjects;
+                
+                // Pre-fetch all subject data and store it in memory
+                const subjectDataCache = {};
+                
+                for (const subject of subjectsData) {
+                    try {
+                        const subjectResponse = await fetch(new URL(subject.file, baseUrl));
+                        if (subjectResponse.ok) {
+                            const subjectData = await subjectResponse.json();
+                            subjectDataCache[subject.id] = subjectData;
+                            
+                            // Populate allLessons for search functionality
+                            if (subjectData.chapters) {
+                                subjectData.chapters.forEach(chapter => {
+                                    if (chapter.lessons) {
+                                        chapter.lessons.forEach(lesson => {
+                                            allLessons.push({
+                                                id: lesson.id,
+                                                title: lesson.title,
+                                                subject: subjectData.title,
+                                                chapter: chapter.title,
+                                                tags: lesson.tags,
+                                                lesson: lesson
+                                            });
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    } catch (err) {
+                        console.error(`Error preloading ${subject.id}:`, err);
+                    }
+                }
+                
+                // Store the cache
+                window.subjectDataCache = subjectDataCache;
+                
+                return true;
+            } catch (error) {
+                console.error('Error preloading data:', error);
+                return false;
+            }
+        }
+        // Load subjects list
         // Load subjects list
         async function loadSubjects() {
             try {
-                const response = await fetch('subjects.json');
+                // Get the base URL for the current page (for GitHub pages compatibility)
+                const baseUrl = window.location.href.includes('github.io') ? 
+                    '/CRSA/data/' : 
+                    window.location.href.split('/').slice(0, -1).join('/') + '/';
+                
+                const response = await fetch(new URL('subjects.json', baseUrl));
+                
+                if (!response.ok) throw new Error(`Failed to fetch subjects.json: ${response.status}`);
+                
                 const data = await response.json();
                 subjectsData = data.subjects;
                 renderSubjects();
             } catch (error) {
                 console.error('Error loading subjects:', error);
-                showToast('Failed to load subjects');
+                showToast('Failed to load subjects. Check console for details.');
+                
+                // Show more detailed error info in the UI
+                subjectsContainer.innerHTML = `
+                    <div class="no-results">
+                        <h3>Error Loading Subjects</h3>
+                        <p>${error.message}</p>
+                        <p>Make sure your JSON files are correctly placed and accessible.</p>
+                    </div>
+                `;
             }
         }
 
@@ -666,15 +807,42 @@
         // Load a specific subject
         async function loadSubject(subjectId) {
             try {
+                // Try to get from cache first
+                if (window.subjectDataCache && window.subjectDataCache[subjectId]) {
+                    return window.subjectDataCache[subjectId];
+                }
+                
                 const subject = subjectsData.find(s => s.id === subjectId);
                 if (!subject) return null;
                 
-                const response = await fetch(subject.file);
+                // Get the base URL for the current page (for GitHub pages compatibility)
+                const baseUrl = window.location.href.includes('github.io') ? 
+                    '/CRSA/data/' : 
+                    window.location.href.split('/').slice(0, -1).join('/') + '/';
+                
+                const response = await fetch(new URL(subject.file, baseUrl));
+                
+                if (!response.ok) throw new Error(`Failed to fetch ${subject.file}: ${response.status}`);
+                
                 const subjectData = await response.json();
+                
+                // Cache the data
+                if (!window.subjectDataCache) window.subjectDataCache = {};
+                window.subjectDataCache[subjectId] = subjectData;
+                
                 return subjectData;
             } catch (error) {
                 console.error(`Error loading subject ${subjectId}:`, error);
-                showToast(`Failed to load ${subjectId}`);
+                showToast(`Failed to load ${subjectId}. Check console for details.`);
+                
+                chaptersContainer.innerHTML = `
+                    <div class="no-results">
+                        <h3>Error Loading Subject</h3>
+                        <p>${error.message}</p>
+                        <p>Make sure your JSON files are correctly placed and accessible.</p>
+                    </div>
+                `;
+                
                 return null;
             }
         }
